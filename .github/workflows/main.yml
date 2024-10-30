@@ -1,0 +1,31 @@
+name: CI-CD
+
+on: 
+  push: 
+    branches: ["main"]
+  workflow_dispatch:
+    
+jobs:
+  CI-BLUE:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3.1.0
+      
+      - name: Autenticação no Docker Hub
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PWD }}
+      
+      - name: Criando o arquivo HTML com o blue page
+        run: sed "s/{{COLOR}}/blue/g" lib/webcolor/templates/index.html.eex.template > lib/webcolor/templates/index.html.eex  
+
+      - name: Construção da imagem Docker do blue page
+        uses: docker/build-push-action@v3.2.0
+        with: 
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: |
+            murichristopher/webcolor_app_image:blue
