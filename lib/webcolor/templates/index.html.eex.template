@@ -1,0 +1,9 @@
+<html>
+  <head>
+    <title>Página de teste</title>
+  </head>
+  <body style="text-align: center;background-color: {{COLOR}}">
+    <h1>Página de teste</h1>
+    <h3>Hostname do servidor que processou a requisição: <%= @hostname %></h3>
+  </body>
+</html>
