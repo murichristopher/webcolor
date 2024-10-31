@@ -47,8 +47,9 @@ jobs:
       - name: Construção da imagem Docker do green page
         uses: docker/build-push-action@v3.2.0
         with: 
-          context: ./src
-          file: ./src/Dockerfile
+          context: ./
+          file: ./Dockerfile
           push: true
           tags: |
-            murichristopher/webcolor_app_image:green
+            murichristopher/webcolor_app_image:blue
+
